@@ -1,0 +1,13 @@
+/* left transition */
+.sliderjs.tr-left .slide {
+    .opacity(1);
+    left: -100%;
+}
+.sliderjs.tr-left .slide.current {
+    left: 0;
+}
+// warning: this ~ selector may fail on some browsers
+.sliderjs.tr-left .slide.current ~ .slide {
+    left: 100%;
+}
+

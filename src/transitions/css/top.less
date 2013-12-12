@@ -1,0 +1,13 @@
+/* top transition */
+.sliderjs.tr-top .slide {
+    .opacity(1);
+    top: -100%;
+}
+.sliderjs.tr-top .slide.current {
+    top: 0;
+}
+// warning: this ~ selector may fail on some browsers
+.sliderjs.tr-top .slide.current ~ .slide {
+    top: 100%;
+}
+

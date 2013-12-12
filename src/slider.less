@@ -1,0 +1,151 @@
+// /!\ This is NOT CSS but LESS - a dynamic stylesheet language
+// This source code is used to generate the final slider.css
+
+//////////////   MIXINS   ////////////////
+
+.transform(@transform) {
+  -webkit-transform: @transform;
+     -moz-transform: @transform;
+      -ms-transform: @transform;
+       -o-transform: @transform;
+          transform: @transform;
+}
+
+.border-radius(@radius: 5px) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+      -ms-border-radius: @radius;
+       -o-border-radius: @radius;
+          border-radius: @radius;
+}
+
+.transition-duration(@duration: 1s) {
+  -webkit-transition-duration: @duration;
+     -moz-transition-duration: @duration;
+      -ms-transition-duration: @duration;
+       -o-transition-duration: @duration;
+          transition-duration: @duration;
+}
+
+.transition-property(@property: all) {
+  -webkit-transition-property: @property;
+     -moz-transition-property: @property;
+      -ms-transition-property: @property;
+       -o-transition-property: @property;
+          transition-property: @property;
+}
+
+.transform-origin(@origin: 50% 50%) {
+  -webkit-transform-origin: @origin;
+     -moz-transform-origin: @origin;
+      -ms-transform-origin: @origin;
+       -o-transform-origin: @origin;
+          transform-origin: @origin;
+}
+
+.opacity(@val) {
+  opacity: @val;
+  @filter: @val*100;
+  filter: ~"alpha(opacity=@{filter})";
+}
+
+.box-sizing(@value) {
+  -webkit-box-sizing: @value;
+     -moz-box-sizing: @value;
+      -ms-box-sizing: @value;
+       -o-box-sizing: @value;
+          box-sizing: @value;
+}
+
+.box-shadow(@value) {
+  -webkit-box-shadow: @value;
+     -moz-box-shadow: @value;
+      -ms-box-shadow: @value;
+       -o-box-shadow: @value;
+          box-shadow: @value;
+}
+
+/////////////////////////////////////////////
+
+/** Slider core styles **/
+.sliderjs {
+  div.header, div.footer {
+    position: absolute;
+    z-index: 50;
+    width: 100%;
+  }
+
+  div.left, div.right {
+    z-index: 30;
+    position: absolute;
+    top: 0px;
+    height: 100%;
+    padding: 4px;
+    a {
+      margin-bottom: 5px;
+    }
+  }
+
+  div.left {
+    left: 0;
+  }
+
+  div.right {
+    right: 0;
+  }
+  
+  div.header {
+    top: 0;
+    padding: 4px;
+    a {
+      float: left;
+      margin-right: 5px;
+    }
+  }
+
+  div.footer {
+    bottom: 0;
+    padding-bottom: 2px;
+    text-align: center;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  a.button {
+    padding: 5px;
+    height: 16px;
+  }
+
+
+  // with a background (themable)
+  .bgcolor, a.button {
+    // define background-color in your themes
+  }
+
+  // with a color (themable)
+  .color, a.button {
+    // define color in your themes
+  }
+
+  // a button
+  a.button {
+    .opacity(0.8);
+    &:hover {
+      .opacity(1);
+    }
+    .border-radius(2px);
+  }
+  
+  // usually for button with icons image of size 15x15
+  .icon {
+    width: 19px;
+    height: 19px;
+    display: block;
+    background-repeat: no-repeat;
+    background-position: 2px 2px;
+    .border-radius(2px);
+  }
+}
+

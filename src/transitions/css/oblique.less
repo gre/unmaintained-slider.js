@@ -1,0 +1,11 @@
+/* oblique transition */
+.sliderjs.tr-oblique .slide {
+    .transform(matrix(1,1,0,1,-100%,0));
+}
+.sliderjs.tr-oblique .slide.current {
+    .transform(matrix(1,0,0,1,0,0));
+}
+.sliderjs.tr-oblique .slide.current ~ .slide {
+    .transform(matrix(1,1,0,1,100%,0));
+}
+

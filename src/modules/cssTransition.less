@@ -1,0 +1,25 @@
+/** Slider Transitions **/
+.sliderjs {
+  position: relative;
+
+  // general properties for all transitions
+  .slide {
+    .transition-duration(1.5s); // default
+    .opacity(0);
+    .transform-origin;
+  }
+  .slide.current {
+    .opacity(1);
+  }
+
+  // reset transition animation
+  &.tr-clear {
+    .slide {
+      -webkit-transition-duration: 0s !important;
+      -moz-transition-duration: 0s !important;
+      -ms-transition-duration: 0s !important;
+      -o-transition-duration: 0s !important;
+      transition-duration: 0s !important;
+    }
+  }
+}

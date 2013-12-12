@@ -1,0 +1,471 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+  <title></title>
+  <!--[if IE]>
+  <script src="build/slider.jquery.js" type="text/javascript"></script>
+  <![endif]-->
+  <link rel="stylesheet" href="build/slider.min.css" />
+  <link rel="stylesheet" href="prettify.css" />
+  <link href='http://fonts.googleapis.com/css?family=Lilita+One' rel='stylesheet' type='text/css'>
+  <script src="build/slider.js" type="text/javascript"></script>
+  <script src="jquery.min.js" type="text/javascript"></script>
+  <script src="prettify.js" type="text/javascript"></script>
+  <script src="THEMES.js" type="text/javascript"></script>
+
+  <style type="text/css">
+    body {
+      background: #334455;
+      background: -webkit-radial-gradient(center, ellipse cover, #334455 0%, #223344 100%);
+      background:    -moz-radial-gradient(center, ellipse cover, #334455 0%, #223344 100%);
+      background:     -ms-radial-gradient(center, ellipse cover, #334455 0%, #223344 100%);
+      background:      -o-radial-gradient(center, ellipse cover, #334455 0%, #223344 100%);
+      background:         radial-gradient(center, ellipse cover, #334455 0%, #223344 100%);
+
+      color: white;
+    }
+    footer {
+      clear: both;
+      text-align: center;
+      margin-top: 20px;
+      padding-top: 10px;
+      border-top: 2px solid #fff;
+      font-style: italic;
+      opacity: 0.5;
+    }
+    #wrapper {
+      margin: 20px auto;
+      width: 550px;
+    }
+    @media screen and (min-width: 1200px) {
+      #wrapper {
+        width: 1100px;
+      }
+      #demo, #features {
+        float: left;
+      }
+      #features {
+        padding: 50px 0px 50px 20px;
+
+        margin-left: 25px;
+        width: 450px;
+        border-left: 5px solid black;
+        min-height: 350px;
+      }
+    }
+    hgroup {
+      text-shadow: 0px 2px 1px rgba(0,0,0,0.5);
+    }
+    h1, h2, h3 {
+      font-family: 'Lilita One';
+    }
+    #features ul {
+      list-style: none;
+      padding: 0;
+    }
+    #features li {
+      float: left;
+      padding: 1px 5px;
+    }
+    #features li .value {
+      display: none;
+      font-family: monospace;
+      font-size: 11px;
+    }
+    #features li a {
+      font-family: monospace;
+      padding: 1px 6px;
+      line-height: 1.5em;
+      text-decoration: none;
+      color: white;
+      background: black;
+      border-radius: 5px;
+      font-size: 12px;
+    }
+    #features li a.disabled {
+      text-decoration: line-through;
+      opacity: 0.5;
+    }
+    #features li {
+      -webkit-transition: background 1s;
+      -moz-transition: background 1s;
+      transition: background 1s;
+    }
+    #features li.changed {
+      -webkit-transition: 0s;
+      -moz-transition: 0s;
+      transition: 0s;
+    }
+    #features.expanded li.changed {
+      background: rgba(0,0,0,0.5);
+    }
+    #features.expanded ul {
+      display: table;
+    }
+    #features.expanded li {
+      float: none;
+      display: table-row;
+    }
+    #features.expanded li .buttonContainer {
+      display: table-cell;
+      padding-right: 10px;
+    }
+    #features.expanded li .value {
+      display: table-cell;
+      border-bottom: 1px solid rgba(0,0,0,0.3);
+      padding: 5px 0;
+      white-space: nowrap;
+      overflow: hidden;
+      max-width: 360px;
+    }
+    #features.expanded li .value:hover {
+      white-space: normal;
+      max-width: auto;
+    }
+
+    #expandContainer {
+      float: right;
+    }
+
+    #themeBuilder {
+      margin: 5px 0;
+      width: 500px;
+    }
+    #theme {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: inline;
+    }
+    #theme li {
+      display: inline;
+    }
+    #theme li:last-child:after {
+      content: ', ...';
+    }
+    #theme li:after {
+      content: ', ';
+    }
+    #theme li input {
+      display: none;
+    }
+    #theme li label {
+      font-family: monospace;
+      padding: 1px 6px;
+      line-height: 1.5em;
+      text-decoration: none;
+      color: white;
+      background: black;
+      border-radius: 5px;
+      font-size: 12px;
+      text-decoration: line-through;
+      opacity: 0.5;
+    }
+    #theme li input:checked ~ label {
+      text-decoration: none;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+
+<div id="wrapper">
+
+  <div id="demo">
+  <hgroup>
+    <h1>Slider.js v2 alpha</h1>
+  </hgroup>
+  <div id="slider"></div>
+
+  <h2>Options</h2>
+  <div id="transitionSelector">
+    <label for="transitionSelect">Transition: </label>
+    <select name="transition" id="transitionSelect"></select>
+  </div>
+  <div id="themeBuilder">
+    <span class="noTheme">Theme: </span>
+    <ul id="theme"></ul>
+  </div>
+  
+  <script type="text/javascript">
+    (function(){
+  var slides = [
+    { "image" : "images/bbb-splash.png", "legend": "Big Buck Bunny - splash", "link": "http://bigbuckbunny.org/" },
+    { "image" : "images/bird1.jpg", "legend": "Big Buck Bunny - bird", "link": "http://bigbuckbunny.org/" },
+    { "image" : "images/evil-frank.png", "legend": "Big Buck Bunny - evil frank", "link": "http://bigbuckbunny.org/" },
+    { "image" : "images/s1_proog.jpg", "legend": "Elephant Dreams - proog", "link": "http://orange.blender.org/" },
+    { "image" : "images/s6_both.jpg", "legend": "Elephant Dreams - proog & emo", "link": "http://orange.blender.org/" },
+    { "image" : "images/s8_emocu.jpg", "legend": "Elephant Dreams - emo", "link": "http://orange.blender.org/" }
+    ];
+    
+  window.slider = new sliderjs.Slider(document.getElementById('slider'), {
+    exceptModules: 'loopBar', 
+    width: 550, 
+    height: 305,
+    slides: slides,
+    transition: { mode: 'glsl', name: 'deformation' }
+  });
+
+  var theme = $('#theme');
+  var themes = slider.theme();
+  $.each(themes, function (i, t) {
+    if (THEMES.indexOf(t) <= 0) THEMES.push(t);
+  });
+  THEMES.sort(function (a, b) { return a > b });
+  $.each(THEMES, function (i, t) {
+    var li = $('<li></li>');
+    var id = 'theme_'+t;
+    var input = $('<input type="checkbox" id="'+id+'" name="theme" value="'+t+'" />');
+    if (themes.indexOf(t) >= 0) {
+      input.attr('checked', 'checked');
+    }
+    input.change(function () {
+      if (input.is(':checked')) {
+        slider.theme({ add: t });
+      }
+      else {
+        slider.theme({ remove: t });
+      }
+    });
+    var label = $('<label for="'+id+'">'+t+'</label>');
+    li.append(input).append(label);
+    theme.append(li);
+  });
+  $('.noTheme').click(function () {
+    $('input[name=theme]:checked').removeAttr('checked');
+    slider.theme("");
+  });
+
+  var transitions = {
+    glsl: [
+      "deformation",
+      "blur", 
+      "diag", 
+      "dislocation", 
+      "flash", 
+      "rainbow", 
+      "smoothl", 
+      "wind"
+    ],
+    canvas: [
+      "circle", 
+      "circles", 
+      "clock", 
+      "diamond", 
+      "squares", 
+      "verticalOpen", 
+      "horizontalSunblind"
+    ],
+    css: [
+      "left", 
+      "topfade", 
+      "flip", 
+      "oblique", 
+      "flip", 
+      "cardflip", 
+      "skewflip", 
+      "zoomin", 
+      "zoomout", 
+      "rotatezoomin", 
+      "rotatezoomout", 
+      "simple"
+    ]
+  };
+
+  var select = $('#transitionSelect');
+  for (var mode in transitions) {
+    var tnames = transitions[mode];
+    var optgroup = $('<optgroup label="'+mode+'"></optgroup>');
+    for (var i = 0; i<tnames.length; ++i) {
+      var tname = tnames[i];
+      optgroup.append('<option label="'+tname+'">'+tname+'</option>');
+    }
+    select.append(optgroup);
+  }
+
+  select.change(function () {
+    var option = $(this).find('option:selected');
+    var optgroup = option.parent();
+    slider.transition({ mode: optgroup.attr('label'), name: option.val() });
+  }).change();
+
+}());
+    </script>
+  </div>
+
+  <div id="features">
+    <div id="expandContainer">
+      <input type="checkbox" id="expand" />
+      <label for="expand">expand</label>
+    </div>
+    <h2>Modules</h2>
+    <ul></ul>
+  </div>
+
+  <script type="text/javascript">
+  $('#features').each(function(){
+    var ul = $(this).find('ul');
+    var modules = sliderjs.modules();
+    var order = [
+      "slide",
+      "transition", 
+      "transitions", 
+      "width", 
+      "height",
+      "theme",
+      "slides",
+      "loop",
+      "fullscreen",
+      "cssTransition",
+      "canvasTransition",
+      "glslTransition",
+      "loader"
+    ];
+    order.reverse();
+    modules = modules.sort(function (a, b) { return order.indexOf(b) - order.indexOf(a) });
+    $.each(modules, function (i, name) {
+      var li = $('<li></li>');
+      var a = $('<a href="#" class="button"></a>').text(name).bind('click', function (e) {
+        e.preventDefault();
+        if (slider.module(name)) {
+          slider.modules.stop(name);
+          a.addClass('disabled');
+        }
+        else {
+          slider.modules.start(name);
+          a.removeClass('disabled');
+        }
+      });
+      if (!slider.module(name))
+        a.addClass('disabled');
+
+      var value = $('<code class="value prettyprint lang-js"></code>');
+      var setValue = function (o) {
+        value.html(prettyPrintOne(stringify(o)));
+        li.addClass('changed').delay(100).queue(function(){ 
+          li.removeClass('changed').dequeue();
+        });
+      }
+      setValue(slider.opt(name));
+      slider.on(name+"Changed", function (o) {
+        setValue(o.value);
+      });
+
+      li.append($('<span class="buttonContainer"></span>').append(a)).append(value).appendTo(ul);
+    });
+  });
+
+  $('#expand').change(function(){
+    var node = $(this);
+    var ul = $('#features');
+    if (node.is(':checked')) {
+      ul.addClass('expanded');
+    }
+    else {
+      ul.removeClass('expanded');
+    }
+  }).change();
+
+function sortci(a, b) {
+  return a.toLowerCase() < b.toLowerCase() ? -1 : 1;
+}
+
+// custom because I want to be able to introspect native browser objects *and* functions
+function stringify(o, simple, visited) {
+  var json = '', i, vi, type = '', parts = [], names = [], circular = false;
+  visited = visited || [];
+  
+  try {
+    type = ({}).toString.call(o);
+  } catch (e) { // only happens when typeof is protected (...randomly)
+    type = '[object Object]';
+  }
+
+  // check for circular references
+  for (vi = 0; vi < visited.length; vi++) {
+    if (o === visited[vi]) {
+      circular = true; 
+      break;
+    }
+  }
+
+  if (circular) {
+    json = '[circular]';
+  } else if (type == '[object String]') {
+    json = '"' + o.replace(/"/g, '\\"') + '"';
+  } else if (type == '[object Array]') {
+    visited.push(o);
+
+    json = '[';
+    for (i = 0; i < o.length; i++) {
+      parts.push(stringify(o[i], simple, visited));
+    }
+    json += parts.join(', ') + ']';
+    json;
+  } else if (type == '[object Object]') {
+    visited.push(o);
+
+    json = '{';
+    for (i in o) {
+      names.push(i);
+    }
+    names.sort(sortci);
+    for (i = 0; i < names.length; i++) {
+      parts.push( stringify(names[i], undefined, visited) + ': ' + stringify(o[ names[i] ], simple, visited) );
+    }
+    json += parts.join(', ') + '}';
+  } else if (type == '[object Number]') {
+    json = o+'';
+  } else if (type == '[object Boolean]') {
+    json = o ? 'true' : 'false';
+  } else if (type == '[object Function]') {
+    json = o.toString();
+  } else if (o === null) {
+    json = 'null';
+  } else if (o === undefined) {
+    json = 'undefined';
+  } else if (simple == undefined) {
+    visited.push(o);
+
+    json = type + '{\n';
+    for (i in o) {
+      names.push(i);
+    }
+    names.sort(sortci);
+    for (i = 0; i < names.length; i++) {
+      try {
+        parts.push(names[i] + ': ' + stringify(o[names[i]], true, visited)); // safety from max stack
+      } catch (e) {
+        if (e.name == 'NS_ERROR_NOT_IMPLEMENTED') {
+          // do nothing - not sure it's useful to show this error when the variable is protected
+          // parts.push(names[i] + ': NS_ERROR_NOT_IMPLEMENTED');
+        }
+      }
+    }
+    json += parts.join(',\n') + '\n}';
+  } else {
+    try {
+      json = o+''; // should look like an object      
+    } catch (e) {}
+  }
+  return json;
+}
+
+  </script>
+
+  
+
+</div>
+
+<footer class="info">
+  Click on modules to enable/disable them. Play with the <code>slider</code> variable for more.<br/>
+  This is a preview unfinished work of the next Slider.JS v2 version. It might exist some bugs.<br/>
+  <br />
+  <strong>SliderJS.org - Gaëtan Renaudeau - 2012</strong>
+</footer>
+
+
+</body>
+</html>
