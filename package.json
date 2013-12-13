@@ -1,0 +1,21 @@
+{
+  "name": "sliderjs",
+  "version": "2.0.0",
+  "description": "lightweight slideshow engine using CSS, Canvas and WebGL Transitions",
+  "keywords": [
+    "sliderjs"
+  ],
+  "author": "Gaëtan Renaudeau <contact@sliderjs.org>",
+  "contributors": [
+  ],
+  "dependencies" : {
+  },
+  "devDependencies": {
+  },
+  "main": "build/slider.js",
+  "license": "Apache2",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gre/slider.js.git"
+  }
+}
