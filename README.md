@@ -1,20 +1,32 @@
 Author notes
 ===
 
-Here we go! I finally release Slider.js v2 (alpha), hours of work here, but this is just the beginning :)
+> Slider.js was a great experiment I wrote in 2010 with the idea to bring the power of WebGL for image slideshows. The library has been very tough to finish because the focus was so wide and it was very hard (or impossible) to match all needs with such a monolithic library approach. 2012 brought to light a new way of doing things: Browserify and a defined way to make modules (CommonJS). I've been working the last years in exploding the great concepts of Slider.js into individual and small focused libraries: doing one simple thing but doing it well.
+- `glsl-transition` and `glsl-transition-core` only focus on implementing a Transition in WebGL. Note that `glsl-transition` uses some http://stack.gl modules which make the library easier to maintain, more solid and less bugged. I have then started http://GLSL.io/ , an ambitious project to make the description of a transition a "standard" among slideshow engines. A GLSL Transition is just a GLSL fragment shader with 4 uniforms: a `float progress`, a `vec2 resolution` and `sampler2D from, to`. Users can also define their own extra uniforms that becomes "parameters" of the transition. Of course a valid transition is when "from" is displayed at progress=0.0 and "to" at progress=1.0. A transition should display a smooth progressing when progress move from 0.0 to 1.0.
+- `kenburns` is another well focused micro-library that produces kenburns effect for DOM, Canvas2D and WebGL (3 implementations).
+- ...and much more micro libraries...
 
-This current SliderJS version 2 is currently in development.
+And finally in 2015, I'm working on `diaporama` that is a simpler, more tested, less monolithic *slider.js*.
 
-Good news for you, I've finally decided that SliderJS (v2) will be open-source.
-Please don't make me regret that choice, the project is open to contribution and wait your donation!
+I'm also working on a Slideshow Editor that will make it very easy to create slideshows with `diaporama`.
 
-<a href="https://flattr.com/submit/auto?user_id=greweb&url=http%3A%2F%2Fgithub.com%2Fgre%2Fslider.js" target="_blank"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0"></a>
+Keep in touch.
 
-<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=renaudeau%2egaetan%40gmail%2ecom&lc=US&item_name=SliderJS&item_number=sliderjs&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHostedGuest"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" alt="PayPal - The safer, easier way to pay online!" /></a>
+Gaëtan Renaudeau
 
-BitCoin: <a href="bitcoin:1N5cGh6QwdFrHhEnFMknrJq517rzLvKevD?amount=0.05">1N5cGh6QwdFrHhEnFMknrJq517rzLvKevD</a>
+---
 
-LiteCoin: <a href="litecoin:LUJgwVbifnajAoGfT2bBKxnFvV584PkLNX?amount=1">LUJgwVbifnajAoGfT2bBKxnFvV584PkLNX</a>
+---
+
+---
+
+
+FOLLOWING IS UNMAINTAINED AND OUTDATED
+
+
+---
+
+
 
 Documentation
 ===
